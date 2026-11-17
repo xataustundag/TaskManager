@@ -1,0 +1,89 @@
+﻿@model List<TaskManager.Models.TaskTwoItem>
+
+@{
+    ViewData["Title"] = "Task Manager Version 1.0 | Ata Ustundag";
+}
+
+<h1>My Tasks</h1>
+<hr />
+
+<h2>New Task</h2>
+
+<form asp-controller="TaskTwo" asp-action="Create" method="post">
+    <div style="margin-bottom: 20px;">
+        <label for="title" style="display: block; margin-bottom: 5px;">Task Title: </label>
+        <input type="text"
+               id="title"
+               name="title"
+               required />
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <label for="description" style="display: block; margin-bottom: 5px;">Description: </label>
+        <textarea id="description"
+                  name="description"
+                  rows="5"
+                  cols="50"></textarea>
+    </div>
+    
+    <div style="margin-bottom: 20px;">
+        <label for="status" style="display: block; margin-bottom: 5px;">Status:</label>
+        <select id="status" name="status">
+            <option value="Not Started">Not Completed</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+        </select>
+    </div>
+    
+    <button type="submit">Add Task</button>
+</form>
+
+@foreach (var task in Model)
+{
+    <div style="margin-top: 20px;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;">
+
+        <div style="display: flex; gap: 10px; align-items: baseline;">
+            <strong>Task ID:</strong>
+            <span>@task.Id</span>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: baseline; margin-top: 12px;">
+            <strong>Title:</strong>
+            <span>@task.Title</span>
+        </div>
+
+        <div style="margin-top: 12px;">
+            <strong>Description:</strong>
+
+            <p style="line-height: 1.6; margin-top: 8px; overflow-wrap: anywhere;">
+                @task.Description
+            </p>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: baseline;">
+            <strong>Status:</strong>
+            <span>@task.Status</span>
+        </div>
+
+        <div style="margin-top: 12px;">
+            <strong>Status In Queue:</strong>
+
+            @if (task.IsCompleted)
+            {
+                <span>Completed</span>
+            }
+            else if(task.Status == "Pending")
+            {
+                <span>Pending</span>
+            }
+            else
+            {
+                <span> Not Started </span>
+            }
+        </div>
+
+    </div>
+}

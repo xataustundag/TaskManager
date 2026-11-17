@@ -1,0 +1,60 @@
+﻿@model List<TaskManager.Models.TaskItem>
+
+@{
+    ViewData["Title"] = "Task Manager Version 1.0 | Ata Ustundag";
+}
+
+<h1>My Tasks</h1>
+<hr />
+
+<h2>New Task</h2>
+
+<form asp-controller="Task" asp-action="Create" method="post">
+    <div>
+        <label for="title">Task Title: </label>
+        <input type="text"
+               id="title"
+               name="title"
+               required />
+    </div>
+    
+    <div>
+        <label for="description">Description: </label>
+        <input type="text"
+               id="description"
+               name="description" />
+    </div>
+    
+    <div>
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+            <option value="Not Completed">Not Completed</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+        </select>
+    </div>
+    
+    <button type="submit">Add Task</button>
+</form>
+@foreach (var task in Model)
+{
+    <div>
+        <h3>Task ID: @task.Id</h3>
+        <h3>@task.Title</h3>
+
+        <p>@task.Description</p>
+        
+        <p>Status: @task.Status</p>
+
+        @if (task.IsCompleted)
+        {
+            <p>IsCompleted: Completed</p>
+        }
+        else
+        {
+            <p>IsCompleted: Pending</p>
+        }
+    </div>
+
+    <hr />
+}
