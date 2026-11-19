@@ -1,0 +1,15 @@
+bin/
+obj/
+.idea/
+.vs/
+.vscode/
+packages/
+_ReSharper.Caches/
+*.user
+*.suo
+*.iml
+.DS_Store
+._*
+__MACOSX/
+.env
+.env.*
